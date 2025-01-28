@@ -1,0 +1,27 @@
+
+class Solution {
+    public ArrayList<String> findPermutation(String s) {
+        // Code here
+        Set<String> ans = new HashSet();
+        boolean[] vst = new boolean[s.length()];
+        makePermute(s,ans,"",vst);
+        return new ArrayList<>(ans);
+    }
+    
+    static void makePermute(String s,Set<String> ans,String curr,boolean[] vst) {
+        if(curr.length() == s.length()) {
+            ans.add(curr);
+            return;
+        }
+        for(int i=0;i<s.length();i++) {
+            if(!vst[i]) {
+                if(i>0 && s.charAt(i) == s.charAt(i-1) && !vst[i-1]) {
+                    continue;
+                }
+                vst[i]=true;
+                makePermute(s,ans,curr+s.charAt(i),vst);
+                vst[i]=false;
+            }
+        }
+    }
+}
