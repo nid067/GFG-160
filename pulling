@@ -1,0 +1,2 @@
+To pull the file from remote repository to local repository , then just type 
+    git pull after that changes made in github will appear in vs code
