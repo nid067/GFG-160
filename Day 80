@@ -1,0 +1,22 @@
+class Solution {
+    
+    public void levelOrderRec(Node root,int lvl,ArrayList<ArrayList<Integer>> res) {
+            if(root == null) {
+                return;
+            }
+            if(res.size() <= lvl) {
+                res.add(new ArrayList<>());
+            }
+            res.get(lvl).add(root.data);
+            
+            levelOrderRec(root.left,lvl+1,res);
+            levelOrderRec(root.right,lvl+1,res);
+    } 
+    
+    public ArrayList<ArrayList<Integer>> levelOrder(Node root) {
+        // Your code here
+        ArrayList<ArrayList<Integer>> res = new ArrayList();
+        levelOrderRec(root,0,res);
+        return res;
+    }
+}
