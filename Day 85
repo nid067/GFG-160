@@ -1,0 +1,29 @@
+/* A Binary Tree node
+
+class Node {
+    int data;
+    Node left, right;
+   Node(int item)    {
+        data = item;
+        left = right = null;
+    }
+}
+*/
+class Solution {
+    // Without using recursion
+    ArrayList<Integer> inOrder(Node root) {
+        // Code
+        ArrayList<Integer> res = new ArrayList();
+        solve(root,res);
+        
+        return res;
+    }
+    
+    void solve(Node root,ArrayList<Integer> res)  {
+        if(root == null)
+           return;
+        solve(root.left,res);
+        res.add(root.data);
+        solve(root.right,res);
+    }
+}
