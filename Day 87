@@ -1,0 +1,36 @@
+Maximum path sum in binary tree
+
+/*
+Node defined as
+class Node{
+    int data;
+    Node left,right;
+    Node(int d){
+        data=d;
+        left=right=null;
+    }
+}
+*/
+
+class Solution {
+    // Function to return maximum path sum from any node in a tree.
+    
+    int maxPathSum(Node node,int[] res) {
+        if(node == null)  return 0;
+        
+        int left=Math.max(0,maxPathSum(node.left,res));
+        int right=Math.max(0,maxPathSum(node.right,res));
+        
+        res[0]=Math.max(res[0],left+right+node.data);
+        
+        return node.data+Math.max(left,right);
+    }
+    
+    int findMaxSum(Node node) {
+        // your code goes here
+        int[] res = {node.data};
+        
+        maxPathSum(node,res);
+        return res[0];
+    }
+}
