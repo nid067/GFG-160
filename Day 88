@@ -1,0 +1,40 @@
+/*
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+*/
+
+class Solution {
+    
+    public int countPaths(Node root,int k,int currSum, Map <Integer,Integer> mp) {
+        if(root == null)  return 0;
+        
+        int pathCount=0;
+        currSum+=root.data;
+        if(currSum == k) 
+          pathCount++;
+          
+        pathCount+=mp.getOrDefault(currSum-k,0);
+        mp.put(currSum,mp.getOrDefault(currSum,0)+1);
+        
+        pathCount+=countPaths(root.left,k,currSum,mp);
+        pathCount+=countPaths(root.right,k,currSum,mp);
+        
+        mp.put(currSum,mp.get(currSum)-1);
+        
+        return pathCount;
+    }
+    public int sumK(Node root, int k) {
+        // code here
+        Map <Integer,Integer> mp = new HashMap();
+        return countPaths(root,k,0,mp);
+    }
+}
