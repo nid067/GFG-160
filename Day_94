@@ -1,0 +1,60 @@
+ Serialize and deserialize a binary tree
+
+class Tree{
+    int data;
+    Tree left,right;
+    Tree(int d){
+        data=d;
+        left=right=null;
+    }
+}*/
+
+class Tree {
+    // Function to serialize a tree and return a list containing nodes of tree.
+    public ArrayList<Integer> serialize(Node root) {
+        // code here
+        ArrayList<Integer> arr=new ArrayList();
+        Queue<Node> q=new LinkedList();
+        q.add(root);
+        
+        while(!q.isEmpty()) {
+            Node curr=q.poll();
+            if(curr==null) {
+              arr.add(-1);
+              continue;
+            }
+            arr.add(curr.data);
+            q.add(curr.left);
+            q.add(curr.right);
+        }
+        return arr;
+    }
+
+    // Function to deserialize a list and construct the tree.
+    public Node deSerialize(ArrayList<Integer> arr) {
+        // code here
+        Node root=new Node(arr.get(0));
+        Queue<Node> q=new LinkedList();
+        q.add(root);
+        
+        int i=1;
+        while(!q.isEmpty()) {
+            Node curr=q.poll();
+            
+            if(arr.get(i) != -1) {
+                Node left=new Node(arr.get(i));
+                curr.left=left;
+                q.add(left);
+            }
+            i++;
+            
+            if(arr.get(i)!=-1) {
+                Node right=new Node(arr.get(i));
+                curr.right=right;
+                q.add(right);
+            }
+            i++;
+        }
+        return root;
+    }
+}
